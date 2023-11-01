@@ -13,6 +13,7 @@ var (
 // Models struct to wrap models.
 type Models struct {
 	Movies MovieModel
+	Users  UserModel
 	// can do Movies interface {Insert(movie *Movie) error ... etc} if need mock
 }
 
@@ -20,5 +21,6 @@ type Models struct {
 func NewModels(db *sql.DB) Models {
 	return Models{
 		Movies: MovieModel{DB: db},
+		Users:  UserModel{DB: db},
 	}
 }

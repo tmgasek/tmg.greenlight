@@ -117,6 +117,8 @@ func (app *application) updateMovieHandler(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
+	// This is now a PATCH endpoint.
+
 	// If the input field is nil, then we know that no corresponding "title"
 	// k/v was provided by client. So we move on and leave it unchanged.
 	// Need to dereference ptr before assigning it to our movie record.
@@ -194,7 +196,7 @@ func (app *application) deleteMovieHandler(w http.ResponseWriter, r *http.Reques
 
 func (app *application) listMoviesHandler(w http.ResponseWriter, r *http.Request) {
 	// To keep consistent, we define an input struct to hold expected values
-	// from quersy string
+	// from query string.
 	var input struct {
 		Title  string
 		Genres []string
@@ -205,7 +207,7 @@ func (app *application) listMoviesHandler(w http.ResponseWriter, r *http.Request
 
 	qs := r.URL.Query()
 
-	// Extract the query values using helpers, falling back on defaults
+	// Extract the query values using helpers, falling back on defaults.
 	input.Title = app.readString(qs, "title", "")
 	input.Genres = app.readCSV(qs, "genres", []string{})
 
@@ -216,7 +218,7 @@ func (app *application) listMoviesHandler(w http.ResponseWriter, r *http.Request
 	// Extract sort query string val, fallback to ID so we sort on movie ID.
 	input.Filters.Sort = app.readString(qs, "sort", "id")
 
-	// Add the supported sort values for this endpoint
+	// Add the supported sort values for this endpoint.
 	input.Filters.SortSafeList = []string{"id", "title", "year", "runtime",
 		"-id", "-title", "-year", "-runtime"}
 

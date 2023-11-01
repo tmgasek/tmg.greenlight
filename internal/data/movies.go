@@ -227,5 +227,4 @@ func (m MovieModel) GetAll(title string, genres []string, filters Filters) ([]*M
 
 	// All ok.
 	return movies, metadata, nil
-
 }

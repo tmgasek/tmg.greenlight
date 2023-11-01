@@ -48,6 +48,7 @@ func (app *application) writeJSON(w http.ResponseWriter, status int, data envelo
 	return nil
 }
 
+// Reads JSON from request body into provided dst.
 func (app *application) readJSON(w http.ResponseWriter, r *http.Request, dst any) error {
 	// limit size of req body to 1MB
 	maxBytes := 1_048_576
@@ -59,7 +60,7 @@ func (app *application) readJSON(w http.ResponseWriter, r *http.Request, dst any
 
 	err := dec.Decode(dst)
 	if err != nil {
-		// start the errors triage
+		// Start the errors triage.
 		var syntaxError *json.SyntaxError
 		var unmarshalTypeError *json.UnmarshalTypeError
 		var invalidUnmarshalError *json.InvalidUnmarshalError
