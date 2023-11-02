@@ -154,3 +154,23 @@ func (app *application) readInt(qs url.Values, key string, defaultValue int, v *
 
 	return i
 }
+
+// Spin up goroutine and run `fn`, using a deferred func to recover any panics and log.
+func (app *application) background(fn func()) {
+	// Increment wait group counter.
+	app.wg.Add(1)
+
+	go func() {
+		// Decr counter before goroutine returns.
+		defer app.wg.Done()
+
+		defer func() {
+			if err := recover(); err != nil {
+				app.logger.PrintError(fmt.Errorf("%s", err), nil)
+			}
+
+		}()
+
+		fn()
+	}()
+}

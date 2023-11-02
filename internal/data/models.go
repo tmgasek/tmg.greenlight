@@ -12,15 +12,19 @@ var (
 
 // Models struct to wrap models.
 type Models struct {
-	Movies MovieModel
-	Users  UserModel
 	// can do Movies interface {Insert(movie *Movie) error ... etc} if need mock
+	Movies      MovieModel
+	Permissions PermissionModel
+	Tokens      TokenModel
+	Users       UserModel
 }
 
 // For ease of use
 func NewModels(db *sql.DB) Models {
 	return Models{
-		Movies: MovieModel{DB: db},
-		Users:  UserModel{DB: db},
+		Movies:      MovieModel{DB: db},
+		Permissions: PermissionModel{DB: db},
+		Tokens:      TokenModel{DB: db},
+		Users:       UserModel{DB: db},
 	}
 }
