@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"greenlight/internal/data"
 	"greenlight/internal/jsonlog"
+	"greenlight/internal/vcs"
 	"os"
 	"runtime"
 	"strings"
@@ -20,7 +21,9 @@ import (
 )
 
 // Generate this auto at build time
-const version = "1.0.0"
+var (
+	version = vcs.Version()
+)
 
 // Struct to hold all config settings for the app.
 // Will read in these settings from cmd flags.
