@@ -1,0 +1,8 @@
+{
+    email tomaszgasek28@gmail.com
+}
+
+188.166.174.250 {
+    respond /debug/* "Not Permitted" 403
+    reverse_proxy localhost:4000
+}
